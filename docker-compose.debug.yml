@@ -1,0 +1,22 @@
+version: '2.1'
+
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+
+  pepperchat-messages-post:
+    image: pepperchat-messages-post
+    build: ./messages/post
+    environment:
+      NODE_ENV: development
+    ports:
+      - 8080:8080
+      - 9229:9229
+    volumes:
+      - ./messages/post
